@@ -1,0 +1,18 @@
+<div *ngIf="ticket">
+  <alert></alert>
+  <div>
+    <a class="pull-right btn btn-default" (click)="goBack()" href=""><i class="fa fa-list-alt lg"></i> Back</a>
+    <a *ngIf="ticket.status != 'closed'" class="pull-right btn btn-primary" [routerLink]="['/tickets', ticket.id, 'edit']"><i class="fa fa-edit lg"></i> Edit</a>
+    <h2>Show ticket</h2>
+  </div>
+  <hr/>
+  <dl>
+    <dt>Name:</dt>
+    <dd>{{ ticket.name }}</dd>
+    <dt>Description:</dt>
+    <dd>{{ ticket.description }}</dd>
+    <dt>Status:</dt>
+    <dd>{{ ticket.status }}</dd>
+  </dl>
+  <comment-list [comments]="ticket.comments" [ticketId]="ticket.id"></comment-list>
+</div>

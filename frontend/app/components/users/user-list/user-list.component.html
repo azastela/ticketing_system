@@ -1,0 +1,33 @@
+<div>
+  <alert></alert>
+  <h2 class="inline-block">Listing users</h2>
+  <a class="btn btn-primary pull-right" routerLink="/users/new"><i class="fa fa-plus lg"></i> New User</a>
+</div>
+<hr/>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="text-sm-center">Email</th>
+        <th class="text-sm-center">Role</th>
+        <th class="text-sm-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" class="text-center">
+        <td>{{ user.email }}</td>
+        <td class="text-sm-center">
+          <span class="tag tag-pill" [ngClass]="getRoleClass(user)">{{ user.role }}</span>
+        </td>
+        <td class="text-sm-center">
+          <a [routerLink]="['/users', user.id, 'edit']">
+            <i class="fa fa-edit lg padding-5"></i>
+          </a>
+          <a (click)="deleteUser(user, $event)" href="#" *ngIf="currentUser.id != user.id">
+            <i class="fa fa-trash lg padding-5"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

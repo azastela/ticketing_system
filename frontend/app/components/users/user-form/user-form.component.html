@@ -1,0 +1,35 @@
+<alert></alert>
+<h2>Manage User</h2>
+<hr>
+<form *ngIf="user" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="password-confirmation">Confirm Password</label>
+      <input type="password" class="form-control" id="password-confirmation" [(ngModel)]="user.password_confirmation" name="password-confirmation">
+    </div>
+  </div>
+  <div class="row">
+    <fieldset class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="role">Role</label>
+      <select class="form-control" id="role" [(ngModel)]="user.role" name="role" required>
+        <option *ngFor="let role of roles" [value]="role.value">{{role.displayValue}}</option>
+      </select>
+    </fieldset>
+  </div>
+  <div>
+    <button type="submit" class="pull-left btn btn-primary">Submit</button>
+    <a class="pull-left btn btn-default" (click)="goBack()" href=""><i class="fa fa-list-alt lg"></i> Back</a>
+  </div>
+</form>

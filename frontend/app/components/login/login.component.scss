@@ -1,0 +1,12 @@
+#sign-in-container {
+  margin-top: 80px;
+  .buttons-container {
+    position: relative;
+    .fa-spin {
+      font-size: 26px;
+      position: absolute;
+      top: 5px;
+      margin-left:5px;
+    }
+  }
+}

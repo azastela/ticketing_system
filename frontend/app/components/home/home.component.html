@@ -1,0 +1,26 @@
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="navbar-brand" routerLink="/" routerLinkActive="active">Ticketing System</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" routerLinkActive="active">Tickets</a>
+      </li>
+      <li *ngIf="currentUser.role == 'admin'" class="nav-item">
+        <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+      </li>
+      <li *ngIf="currentUser.role == 'agent'" class="nav-item">
+        <a class="nav-link" href="{{reportUrl}}" target='_blank'>Report</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav float-lg-right">
+      <li class="nav-item">
+        <a routerLink="/login" class="nav-link">Sign Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

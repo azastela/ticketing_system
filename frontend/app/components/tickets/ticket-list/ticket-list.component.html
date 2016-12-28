@@ -1,0 +1,57 @@
+<div>
+  <alert></alert>
+  <h2 class="inline-block">Listing tickets</h2>
+  <a *ngIf="currentUser.role != 'agent'" class="btn btn-primary pull-right" routerLink="/tickets/new"><i class="fa fa-plus lg"></i> New Ticket</a>
+</div>
+<hr/>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th *ngIf="currentUser.role != 'customer'" class="text-sm-center">Customer</th>
+        <th class="text-sm-center">Name</th>
+        <th class="text-sm-center">Assigned To</th>
+        <th class="text-sm-center">Status</th>
+        <th class="text-sm-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets" class="text-center">
+        <td *ngIf="currentUser.role != 'customer'" class="text-sm-center">
+          <span class="tag tag-pill tag-primary">
+            {{ ticket.author_email }}
+          </span>
+        </td>
+        <td>{{ ticket.name }}</td>
+        <td class="text-sm-center">
+          <span *ngIf="ticket.assigned_to_email" class="tag tag-pill tag-default">
+            {{ ticket.assigned_to_email }}
+          </span>
+        </td>
+        <td class="text-sm-center">
+          <span class="tag tag-pill" [ngClass]="getStatusClass(ticket)">{{ ticket.status }}</span>
+        </td>
+        <td class="text-sm-center">
+          <a [routerLink]="['/tickets', ticket.id]" title="show">
+            <i class="fa fa-eye lg padding-5"></i>
+          </a>
+          <a *ngIf="ticket.status != 'closed'" [routerLink]="['tickets', ticket.id, 'edit']" title="edit">
+            <i class="fa fa-edit lg padding-5"></i>
+          </a>
+          <a *ngIf="ticket.status == 'closed'" (click)="changeStatus(ticket, 'reopened', $event)" href="#" title="reopen">
+            <i class="fa fa-refresh lg padding-5"></i>
+          </a>
+          <a *ngIf="ticket.status != 'closed'" (click)="changeStatus(ticket, 'closed', $event)" href="#" title="close">
+            <i class="fa fa-close lg padding-5"></i>
+          </a>
+          <a *ngIf="ticket.assigned_to_id != currentUser.id && currentUser.role == 'agent'" (click)="assignToMe(ticket, $event)" href="#" title="assign to me">
+            <i class="fa fa-user lg padding-5"></i>
+          </a>
+          <a *ngIf="currentUser.role == 'admin'" (click)="deleteTicket(ticket, $event)" href="#" title="delete">
+            <i class="fa fa-trash lg padding-5"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

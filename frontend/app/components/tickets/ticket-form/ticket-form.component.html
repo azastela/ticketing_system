@@ -1,0 +1,45 @@
+<alert></alert>
+<h2>Manage Ticket</h2>
+<hr>
+<form *ngIf="ticket" (ngSubmit)="onSubmit()">
+  <div class="row" *ngIf="currentUser.role == 'admin'">
+    <fieldset class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="author">Author</label>
+      <select class="form-control" id="author" [(ngModel)]="ticket.author_id" name="author" required>
+        <option *ngFor="let author of authors" [value]="author.id">{{author.email}}</option>
+      </select>
+    </fieldset>
+  </div>
+  <div class="row" *ngIf="currentUser.role != 'customer'">
+    <fieldset class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="agent">Assign To</label>
+      <select class="form-control" id="agent" [(ngModel)]="ticket.assigned_to_id" name="agent" required>
+        <option *ngFor="let agent of agents" [value]="agent.id">{{agent.email}}</option>
+      </select>
+    </fieldset>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="ticket.name" name="name" required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="ticket.description" name="description"></textarea>
+    </div>
+  </div>
+  <div class="row" *ngIf="ticket.id">
+    <fieldset class="col-md-6 col-sm-6 col-xs-6 form-group">
+      <label for="status">Status</label>
+      <select class="form-control" id="status" [(ngModel)]="ticket.status" name="status" required>
+        <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+      </select>
+    </fieldset>
+  </div>
+  <div>
+    <button type="submit" class="pull-left btn btn-primary">Submit</button>
+    <a class="pull-left btn btn-default" (click)="goBack()" href=""><i class="fa fa-list-alt lg"></i> Back</a>
+  </div>
+</form>

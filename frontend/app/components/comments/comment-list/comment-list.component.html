@@ -1,0 +1,15 @@
+<h3>Comments</h3>
+<hr/>
+<div class="media bottom-20" *ngFor="let comment of comments">
+  <div class="media-heading tag tag-pill tag-primary">{{comment.created_at | date}} by {{comment.user_email}}</div>
+  <div class="media-body">
+    {{comment.content}}
+  </div>
+  <button *ngIf="currentUser.role == 'admin'" class="btn btn-danger btn-sm" (click)="deleteComment(comment)"><i class="fa fa-trash lg"></i></button>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <textarea class="form-control bottom-20" rows="3" placeholder="Type your comment here" [(ngModel)]="newComment.content" name="content"></textarea>
+    <button class="btn btn-primary" (click)="addComment()"><i class="fa fa-plus lg"></i> Add Comment</button>
+  </div>
+</div>
